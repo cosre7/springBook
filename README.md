@@ -31,5 +31,7 @@
 	- StaticApplicationContext는 코드에 의해 설정 메타정보를 등록하는 기능을 제공하는 애플리케이션 컨텍스트. -> 테스트용으로 적합
 	- IoC 컨테이너가 관리하는 빈은 클래스 단위가 아니라 오브젝트 단위이다.
 	- IoC 컨테이너는 일단 빈 오브젝트가 생성되고 관계가 만들어지면 그 뒤로는 거의 관여하지 않는다.
-	
+
+### 1.1.2 IoC 컨테이너의 종류와 사용 방법
+- XmlBeanDefinitionReader를 GenericApplicationContext가 이용하도록 해서 hello 빈과 printer 빈을 등록하고 사용하게 하기
 	

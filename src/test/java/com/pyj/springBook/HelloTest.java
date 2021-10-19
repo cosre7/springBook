@@ -7,6 +7,8 @@ import org.junit.Test;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.RuntimeBeanReference;
 import org.springframework.beans.factory.support.RootBeanDefinition;
+import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
+import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.context.support.StaticApplicationContext;
 
 public class HelloTest {
@@ -74,6 +76,22 @@ public class HelloTest {
 		 * 출력
 		 * -> 결과를 스트링으로 저장해두는 printer 빈을 통해 확인.
 		 * */
+		assertThat(ac.getBean("printer").toString(), is("Hello Spring"));
+	}
+	
+	@Test 
+	public void genericApplicationContext() {
+		GenericApplicationContext ac = new GenericApplicationContext();
+		
+		XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(ac);
+		// XmlBeanDefinitionReader 는 기본적으로 클래스패스로 정의된 리소스로부터 파일을 읽는다.
+		reader.loadBeanDefinitions(
+				"springBook/src/main/webapp/WEB-INF/spring/genericApplicationContext.xml");
+		ac.refresh(); // 모든 메타정보가 등록이 완료되었으니 애플리케이션 컨테이너를 초기화하라는 명령
+		
+		Hello hello = ac.getBean("hello", Hello.class);
+		hello.print();
+		
 		assertThat(ac.getBean("printer").toString(), is("Hello Spring"));
 	}
 }
